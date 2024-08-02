@@ -20,7 +20,14 @@ app.post('/users/:id', (req, res) => {
     UserModel.create(req.body);
     return res.json ({
         message: "Usuario criado com sucesso!"
-    })
+    });
+});
+
+app.post('/products', (req, res) => {
+    ProductModel.create(req.body);
+    return res.json({
+        massage: "Produto criado com sucesso!"
+    });
 });
 
 app.listen(3000);
