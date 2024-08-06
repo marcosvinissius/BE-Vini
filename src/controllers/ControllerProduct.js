@@ -3,21 +3,10 @@ const ProductModel = require('../models/ProductModel');
 const ControllerProduct = {
 
     create(req, res) {
-
-        let messageReturn = ""
-
-        if (req.body.name || req.body.price || !req.body.user_id) {
-            messageReturn = 'firstname, surname, email e password são obrigatorios!'
-        }
-
-        else {
-            ProductModel.create(req.body);
-            messageReturn = 'Usuario criado com sucesso!'
-        }
-
-        return res.json({
-            message: messageReturn
-        });
+        ProductModel.create(req.body);
+        res.json({
+            message: "produto cadastrado com sucesso!"
+        })
     },
 
     async listProduct (req, res) {
@@ -43,6 +32,11 @@ const ControllerProduct = {
         return res.json({
             message: "Produto atualizado com sucesso!"
         });
+    },
+
+    async listing (req, res) {
+        let listing = await ProductModel.findAll()
+        res.json(listing);
     }
 }
 

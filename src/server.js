@@ -18,6 +18,7 @@ app.post('/products', ControllerProduct.create);
 app.put('/users/:id', UserController.update);
 app.delete('/users/:id', UserController.delete);
 app.put('./products/:id', ControllerProduct.update);
+app.post('/listing', ControllerProduct.listing);
 
 app.listen(3000);
 
