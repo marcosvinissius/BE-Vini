@@ -6,12 +6,10 @@ const ControllerProduct = {
 
         let messageReturn = ""
 
-        if (req.body.firstname || req.body.surname || !req.body.email || !req.body.password) {
+        if (req.body.name || req.body.price || !req.body.user_id) {
             messageReturn = 'firstname, surname, email e password são obrigatorios!'
         }
-        else if(){
 
-        }
         else {
             ProductModel.create(req.body);
             messageReturn = 'Usuario criado com sucesso!'

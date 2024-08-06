@@ -2,10 +2,31 @@ const { response } = require('express');
 const UserModel = require('../models/UserModels');
 
 const UserController = {
-    create(req, res) {
-        UserModel.create(req.body);
-        return res.json ({
-            message: "Usuario criado com sucesso!"
+    async create(req, res) {
+        let messageReturn = ""
+        const email = req.body.email
+        const emailReq = await UserModel.findOne(({
+            where: { email }
+        }));
+
+        if (!req.body.firstname || !req.body.surname || !req.body.email || !req.body.password) {
+            return res.status(400).json({
+                message: 'firstname, surname, email e password são obrigatorios!'
+            });
+        }
+        else if (emailReq && emailReq.dataValues.id > 0) {
+            return res.status(400).json({
+                message: 'Este email ja esta cadastrado!'
+            });
+        }
+        else {
+            ProductModel.create(req.body);
+            messageReturn = 'Usuario criado com sucesso!'
+        }
+
+
+        return res.json({
+            message: messageReturn
         });
     },
 
